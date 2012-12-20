@@ -1,0 +1,56 @@
+<table id="list" class="tablesorter">
+ <thead class="header">
+  <tr>
+    <th>N° ordre</th>
+    <th>BP N° </th>
+    <th>Raison sociale </th>
+    <th>code postal </th>
+    <th>Rue </th>
+    <th>Ville </th>
+    <th>Nb contracts </th>
+    <th>Nb machines</th>
+
+
+  </tr>
+ </thead>
+<tbody>
+<% if 0 == @bps.size %>
+ <tr>
+    <td colspan="11" align='center'>Aucun résultat ne correnpond à votre recherche</td>
+ </tr>
+<% else %>
+<% nborder=0 %>
+<% @bps.each do |bp|  %>
+ <tr>
+    <td><%= nborder += 1 %></td>
+    <td><%=h bp.bpno%></td>
+    <td><%=h bp.bpcentralorg.name1 if bp.bpcentralorg.name1%></td>
+    <td><%=h bp.postl_cod1 if bp.postl_cod1%></td>
+    <td><%=h bp.house_no + " " + bp.street if bp.street%></td>
+    <td><%=h bp.city if bp.city %></td>
+    <td align='center'>
+        <%=h bp.nbcontracts if bp.nbcontracts%>&nbsp;&nbsp;
+        <% if  bp.nbcontracts && bp.nbcontracts > 0 %>
+        <%= link_to "<button title='Voir le nombre de contrats du bp' class='show-button' id='associate-class-" + bp.bpno.to_s + "'></button>", show_bpcontract_path(:bpno => bp.bpno), :class => "get" %>
+        <% end %>
+    </td>
+    <td align='center'> <%=h bp.nbmachines if bp.nbmachines%>&nbsp;&nbsp;
+	 <% if bp.nbmachines && bp.nbmachines > bp.nbcontracts %>
+		<%= link_to "<button title='Voir le nombre de machines du bp' class='show-button' id='associate-class-" + bp.bpno.to_s + "'></button>", show_bpmachine_path(:bpno => bp.bpno), :class => "get" %>
+	 <% end %>
+    </td>
+
+
+  </tr>
+<% end %>
+<% end %>
+</tbody>
+<tfoot>
+  <tr>
+    <th colspan="9" align='center' >
+
+     </th>
+    
+  </tr>
+</tfoot>
+</table>

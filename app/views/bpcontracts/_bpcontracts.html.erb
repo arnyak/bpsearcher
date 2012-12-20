@@ -1,0 +1,44 @@
+<table id="list" class="tablesorter">
+ <thead class="header">
+  <tr>
+    <th>N° ordre</th>
+    <th>N° Contrat</th>
+    <th>Type de contrat</th>
+    <th>Date de fin </th>
+    <th>N° Série </th>
+    <th>Machine </th>
+    <th>BP Sold to</th>
+    <th>Sold to </th>
+    <th>BP Bill to</th>
+    <th>Bill to </th>
+  </tr>
+ </thead>
+<tbody>
+<% nborder=0 %>
+<% @bpcontracts.each do |bpcontract|  %>
+ <tr>
+    <td><%= nborder += 1 %></td>
+    <td><%=h bpcontract.contract_no%></td>
+    <td><%=h bpcontract.product_252%></td>
+    <td><%=h format_date(bpcontract.contract_enddate) %></td>
+    <td><%=h bpcontract.serial_no  %></td>
+    <td><%=h bpcontract.description_170  %></td>
+    <td><%=h bpcontract.sold_to%></td>
+    <td><%=h bpcontract.sold_to_name %></td>
+    <td><%=h bpcontract.bill_to%></td>
+    <td><%=h bpcontract.bill_to_name %></td>
+  </tr>
+<% end %>
+</tbody>
+<tfoot>
+  <tr>
+    <th colspan="11" align='center' >
+
+     </th>
+    
+  </tr>
+</tfoot>
+</table>
+<% if @bpcontracts.size > 0 %>
+		<% #= link_to "<button title='Exporter vers excel' class='show-button' id='associate-class-'></button>",'#', :class => "get" %>
+<% end %>

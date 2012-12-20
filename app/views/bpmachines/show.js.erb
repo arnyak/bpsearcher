@@ -1,0 +1,6 @@
+var content = "<div id='dialog' title='<%= " BP " + @bp.bpno + " : " + @bp.name1 %>'></div>";
+$("#searchdiv").before(content);
+$("#dialog").html("<%= escape_javascript(render :partial => 'bpmachines') %>");
+$("#dialog").dialog({buttons: { Quitter: function() {$(this).dialog("close");}}, width: 'auto', modal: true, close: function(event, ui) { $(this).remove(); } });
+
+

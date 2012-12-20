@@ -1,0 +1,2 @@
+module BpcontractsHelper
+end

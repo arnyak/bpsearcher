@@ -1,0 +1,100 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+       "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="en" lang="en">
+<head>
+  <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
+  <title>Xerox - BP Searcher</title>
+  <%= stylesheet_link_tag 'application' %>
+  <%= stylesheet_link_tag 'redmond/jquery-ui-1.8.5.custom' %>
+  
+  <%= javascript_include_tag 'jquery-1.4.2.min' %>
+  <%= javascript_include_tag 'jquery-ui-1.8.custom.min' %>
+  <%= javascript_include_tag 'application' %>
+  <%= javascript_include_tag 'jquery.tablesorter.min' %>
+  
+
+  <% if protect_against_forgery? %>
+  <script type='text/javascript'>
+	//<![CDATA[
+	window._auth_token_name = "#{request_forgery_protection_token}";
+	window._auth_token = "#{form_authenticity_token}";
+	//]]>
+  </script>
+  <% end %>
+
+</head>
+<body>
+<div id="main" class="ui-widget-content ui-corner-all">
+
+<div id="left" class="ui-widget ui-corner-all">
+
+<img src="/images/bpsearchernew.gif">
+
+<div id="searchdiv" class="ui-widget-header ui-corner-all" >
+Pour rechercher, appuyez sur la touche entrée lorsque vous êtes dans un champ ou cliquez sur le bouton "Search"
+
+<p></p>
+<% form_tag 'home/', :id => 'searchform', :class => 'ajaxForm' do |f| %>
+<table border='0'>
+<tr>
+<td><%= label_tag 'Raison sociale' %> </td>
+</tr>
+<tr>
+<td><%= text_field_tag 'raisonsociale','', :name=>'home[raisonsociale]', :maxlength => 255, :size => 20, :class => 'submitform'%> </td>
+</tr>
+<tr>
+<td><%= label_tag 'Code Postal'%> </td>
+</tr>
+<tr>
+<td><%= text_field_tag 'postalcode','', :name=>'home[postalcode]', :maxlength => 5, :size => 20, :class => 'submitform'%>
+</td>
+</tr>
+<tr>
+<td><%= label_tag 'Rue'%>
+</td>
+</tr>
+<tr>
+<td> <%= text_field_tag 'street','', :name=>'home[street]', :maxlength => 255, :size => 20,  :class => 'submitform'%>
+</td>
+</tr>
+<tr>
+<td><%= label_tag 'Ville'%>
+</td>
+</tr>
+<tr>
+<td>  <%= text_field_tag 'city','', :name=>'home[city]', :maxlength => 255, :size => 20,  :class => 'submitform'%>
+</td>
+</tr>
+<tr>
+<td><%= label_tag 'N° de Série'%>
+</td>
+</tr>
+<tr>
+<td> <%= text_field_tag 'serialno','', :name=>'home[serialno]', :maxlength => 25, :size => 20, :class => 'submitform' %></td>
+</tr>
+<tr>
+<td align='center'>
+<br/>
+<% # = label_tag 'Boîte postale'%>&nbsp;  <%= text_field_tag 'pobox','', :name=>'home[pobox]', :maxlength => 15, :size => 5,  :class => 'submitform'%>
+<%= submit_tag("Reset", { :name => 'reset', :id => 'reset_button', :type => "reset" }) %>
+<%= submit_tag 'Search', :class => 'submitformbyclick' %>
+</td>
+</tr>
+</table>
+<% end %>
+</div>
+</div>
+<div id='data' class="ui-widget-content ui-corner-all">
+<%= yield %>
+</div>
+
+</div>
+
+<div id="footer" class="ui-widget">
+XEROX France 2010 - <a href=""></a> - <img src="/images/xerox.gif">
+</div>
+
+</body>
+
+</html>
